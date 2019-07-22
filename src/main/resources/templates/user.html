@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>users</title>
+</head>
+<body>
+
+<table>
+    <thead class="thead-dark">
+    <tr class="text-center">
+        <th scope="col">ID</th>
+        <th scope="col">USERNAME</th>
+        <th scope="col">STATUS</th>
+        <th scope="col">ABOUT THIS USER</th>
+    </tr>
+    </thead>
+    <tbody class="text-center">
+    <tr th:each="user,stat : ${users}">
+        <td th:text="${stat.count}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.status}"></td>
+        <td>
+            <a href="#" th:href="@{/public/user/about(user=${user.id})}">About...</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="pagination">
+    <ul class="pagination">
+        <li class="page-item" th:each="currentPage : ${#numbers.sequence( 1,numberPage)}">
+            <a class="page-link" href="#" th:href="@{/public/user(currentPage=${currentPage})}"
+               th:text="${currentPage}"> </a>
+        </li>
+    </ul>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

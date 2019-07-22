@@ -1,0 +1,55 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="com.gmail.salahub.nikolay" id="create_table">
+        <sql dbms="postgresql" endDelimiter=";">
+            CREATE TABLE IF NOT EXISTS users(
+            u_id serial primary key,
+            u_username varchar not null,
+            u_password varchar not null,
+            u_first_name varchar not null,
+            u_last_name varchar not null,
+            u_deleted boolean default false not null,
+            u_role varchar not null,
+            u_status varchar not null,
+            u_date_created date not null);
+        </sql>
+    </changeSet>
+
+    <changeSet author="com.gmail.salahub.nikolay" id="insert_admin">
+        <sql dbms="postgresql" endDelimiter=";">
+            INSERT INTO users(u_username,u_password,u_first_name,u_last_name,
+            u_deleted, u_role, u_status, u_date_created) VALUES(
+            'admin'
+            ,'$2a$10$tEHlqzb1MOg1J5UxFNReDeGj0spqhd5UoAS8s9fHlveKKoGJWNwq.'
+            ,'firstname'
+            ,'lastname'
+            ,false
+            ,'ADMINISTRATOR'
+            ,'ACTIVE'
+            ,'1999-01-08'
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet author="com.gmail.salahub.nikolay" id="insert_user">
+        <sql dbms="postgresql" endDelimiter=";">
+            INSERT INTO users(u_username,u_password,u_first_name,u_last_name,
+            u_deleted, u_role, u_status, u_date_created) VALUES(
+            'user'
+            ,'$2a$10$tEHlqzb1MOg1J5UxFNReDeGj0spqhd5UoAS8s9fHlveKKoGJWNwq.'
+            ,'firstname'
+            ,'lastname'
+            ,false
+            ,'ADMINISTRATOR'
+            ,'ACTIVE'
+            ,'1999-01-08'
+            );
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
+
+
